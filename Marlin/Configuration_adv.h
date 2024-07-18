@@ -325,12 +325,12 @@
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
   #define THERMAL_PROTECTION_BED_PERIOD        20 // (seconds)
-  #define THERMAL_PROTECTION_BED_HYSTERESIS     5 // (°C)
+  #define THERMAL_PROTECTION_BED_HYSTERESIS     2 // (°C)
 
   /**
    * As described above, except for the bed (M140/M190/M303).
    */
-  #define WATCH_BED_TEMP_PERIOD                90 // (seconds)
+  #define WATCH_BED_TEMP_PERIOD                60 // (seconds)
   #define WATCH_BED_TEMP_INCREASE               2 // (°C)
 #endif
 
@@ -344,7 +344,7 @@
   /**
    * Heated chamber watch settings (M141/M191).
    */
-  #define WATCH_CHAMBER_TEMP_PERIOD            80 // (seconds)
+  #define WATCH_CHAMBER_TEMP_PERIOD           120 // (seconds)
   #define WATCH_CHAMBER_TEMP_INCREASE           2 // (°C)
 #endif
 
@@ -2151,7 +2151,7 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-#define LIN_ADVANCE
+//#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
@@ -2604,7 +2604,7 @@
     //#define EVENT_GCODE_AFTER_TOOLCHANGE "G12X"   // Extra G-code to run after tool-change
   #endif
 
-  // #define TOOLCHANGE_ZRAISE_NO_PRINTING  // 切换挤出机平台下降
+  #define TOOLCHANGE_ZRAISE_NO_PRINTING  // 切换挤出机平台下降
 
   /**
    * Extra G-code to run while executing tool-change commands. Can be used to use an additional
@@ -2778,7 +2778,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       900        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.075    // Multiplied x1000 for TMC26X
@@ -2798,7 +2798,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       600
+    #define Y_CURRENT       800
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.075
@@ -2818,7 +2818,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       700
+    #define Z_CURRENT       600
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.075
@@ -2918,7 +2918,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      800
+    #define E0_CURRENT      900
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.075
     #define E0_CHAIN_POS     -1
@@ -3083,8 +3083,8 @@
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
   #if HAS_STEALTHCHOP
-    #define STEALTHCHOP_XY
-    #define STEALTHCHOP_Z
+    // #define STEALTHCHOP_XY
+    // #define STEALTHCHOP_Z
     #define STEALTHCHOP_I
     #define STEALTHCHOP_J
     #define STEALTHCHOP_K
@@ -3169,10 +3169,10 @@
   #define X2_HYBRID_THRESHOLD    350
   #define Y_HYBRID_THRESHOLD     100
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD      20 //3
-  #define Z2_HYBRID_THRESHOLD     20 //3
-  #define Z3_HYBRID_THRESHOLD     20 //3
-  #define Z4_HYBRID_THRESHOLD     20 //3
+  #define Z_HYBRID_THRESHOLD       3
+  #define Z2_HYBRID_THRESHOLD      3
+  #define Z3_HYBRID_THRESHOLD      3
+  #define Z4_HYBRID_THRESHOLD      3
   #define I_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define J_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define K_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
