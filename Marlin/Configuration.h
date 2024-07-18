@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(CreatBot LYN, F430 config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(CreatBot LYN, D600 Pro 2 config)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -136,7 +136,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "CreatBot F430"
+#define CUSTOM_MACHINE_NAME "CreatBot D600 Pro 2"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -159,9 +159,9 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC5160
-#define Y_DRIVER_TYPE  TMC5160
-#define Z_DRIVER_TYPE  TMC5160
+#define X_DRIVER_TYPE  TB6600
+#define Y_DRIVER_TYPE  TB6600
+#define Z_DRIVER_TYPE  TB6600
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -254,13 +254,13 @@
 #endif
 
 // A dual-nozzle that uses a servomotor to raise/lower one (or both) of the nozzles
-//#define SWITCHING_NOZZLE
+#define SWITCHING_NOZZLE
 #if ENABLED(SWITCHING_NOZZLE)
-  #define SWITCHING_NOZZLE_SERVO_NR 0
+  #define SWITCHING_NOZZLE_SERVO_NR 1
   //#define SWITCHING_NOZZLE_E1_SERVO_NR 1          // If two servos are used, the index of the second
-  #define SWITCHING_NOZZLE_SERVO_ANGLES { 0, 90 }   // A pair of angles for { E0, E1 }.
+  #define SWITCHING_NOZZLE_SERVO_ANGLES { 30, 150 } // A pair of angles for { E0, E1 }.
                                                     // For Dual Servo use two pairs: { { lower, raise }, { lower, raise } }
-  #define SWITCHING_NOZZLE_SERVO_DWELL 2500         // Dwell time to wait for servo to make physical move
+  #define SWITCHING_NOZZLE_SERVO_DWELL 0            // Dwell time to wait for servo to make physical move
   #define SWITCHING_NOZZLE_SERVO_ALIGN 90           // 升降舵机对齐角度
 #endif
 
@@ -641,7 +641,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      160
+#define BED_MAXTEMP      110
 #define CHAMBER_MAXTEMP  80
 
 /**
@@ -769,16 +769,16 @@
 #define PIDTEMPBED
 
 #if ENABLED(PIDTEMPBED)
-  //#define SLOW_PID_BED
+  #define SLOW_PID_BED
 
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 12.24
-  #define DEFAULT_bedKi 0.36
-  #define DEFAULT_bedKd 277.49
+  #define DEFAULT_bedKp 17.22
+  #define DEFAULT_bedKi 0.9
+  #define DEFAULT_bedKd 218.61
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1074,9 +1074,9 @@
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-//#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
+#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
 //#define USE_KMAX_PLUG
@@ -1137,23 +1137,23 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define U_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define V_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define W_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define U_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define V_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define W_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1174,7 +1174,7 @@
 //#define ENDSTOP_NOISE_THRESHOLD 2
 
 // 电机换向后零位延时触发
-//#define ENDSTOP_THRESHOLD_AFTER_DIR 2  // ms
+#define ENDSTOP_THRESHOLD_AFTER_DIR 2  // ms
 
 // Check for stuck or disconnected endstops during homing moves.
 //#define DETECT_BROKEN_ENDSTOP
@@ -1204,7 +1204,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 10000.0/127, 50000.0/381, 800, 142 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 800.0/3, 800.0/3, 1600, 360 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1359,15 +1359,15 @@
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
-//#define Z_PROBE_SERVO_NR 0
+#define Z_PROBE_SERVO_NR 0
 #ifdef Z_PROBE_SERVO_NR
-  //#define Z_SERVO_ANGLES { 70, 0 }      // Z Servo Deploy and Stow angles
+  #define Z_SERVO_ANGLES { 20, 160 }      // Z Servo Deploy and Stow angles
 #endif
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#define BLTOUCH
+// #define BLTOUCH
 
 /**
  * MagLev V4 probe by MDD
@@ -1730,8 +1730,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 400
-#define Y_BED_SIZE 300
+#define X_BED_SIZE 600
+#define Y_BED_SIZE 600
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1739,7 +1739,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 300
+#define Z_MAX_POS 600
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2279,7 +2279,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (X_BED_SIZE / 2), (Y_BED_SIZE - 50), 20 }
+  #define NOZZLE_PARK_POINT { (X_BED_SIZE / 2), 200, 20 }
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN  30   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -3024,11 +3024,11 @@
 #endif
 
 #ifdef DGUS_LCD_UI_CREATBOT
-  #define CreatBot_DGUS_V5
-  //#define CreatBot_DGUS_V6
+  //#define CreatBot_DGUS_V5
+  #define CreatBot_DGUS_V6
 #endif
 
-//#define CREATBOT_WIFI_SUPPORT
+#define CREATBOT_WIFI_SUPPORT
 
 #if ENABLED(CREATBOT_WIFI_SUPPORT)
   #define WiFi_SERIAL_PORT  1
@@ -3419,10 +3419,10 @@
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }       // BLTouch
-
+#define SERVO_DELAY { 1000, 1400 }      // 1000 > (2100 - 900) * (160 - 20) / 180
+                                        // 1400 > (2528 - 512) * (150 - 30) / 180
 // Only power servos during movement, otherwise leave off to prevent jitter
-//#define DEACTIVATE_SERVOS_AFTER_MOVE
+#define DEACTIVATE_SERVOS_AFTER_MOVE
 
 // Edit servo angles with M281 and save to EEPROM with M500
 //#define EDITABLE_SERVO_ANGLES
@@ -3431,27 +3431,16 @@
 //#define SERVO_DETACH_GCODE
 
 // 自定义舵机的脉宽范围
-//#define SERVO0_PULSE_CUSTOM
-//#define SERVO0_MIN_PULSE  900
-//#define SERVO0_MAX_PULSE  2100
+#define SERVO0_PULSE_CUSTOM
+#define SERVO0_MIN_PULSE  900
+#define SERVO0_MAX_PULSE  2100
 
-//#define SERVO1_PULSE_CUSTOM
-//#define SERVO1_MIN_PULSE  512
-//#define SERVO1_MAX_PULSE  2528
+#define SERVO1_PULSE_CUSTOM
+#define SERVO1_MIN_PULSE  512
+#define SERVO1_MAX_PULSE  2528
 
 // 降低舵机速度
-//#define SERVO_SPEED_SLOWLY
-
-// @section register
-
-#define HAS_CHIP_ID
-//#define SUPPORT_REG_KEY
-#ifdef SUPPORT_REG_KEY
-  #define REGSN_EEPROM_OFFSET 2
-
-  #define TOTAL_TIME_LIMIT    720000      // seconds 200hour For Part-Payment
-  #define REG_PLULIC_KEY      0xDDDDDDDD  // 公钥
-#endif
+#define SERVO_SPEED_SLOWLY
 
 // @section canBus
 
