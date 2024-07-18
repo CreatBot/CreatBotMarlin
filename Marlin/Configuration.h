@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(CreatBot LYN, F430 config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(CreatBot LYN, F430 NX config)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -88,7 +88,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_CREATBOT_V1_0
+  #define MOTHERBOARD BOARD_CREATBOT_V2_0
 #endif
 
 /**
@@ -136,7 +136,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "CreatBot F430"
+#define CUSTOM_MACHINE_NAME "CreatBot F430 NX"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -162,7 +162,7 @@
 #define X_DRIVER_TYPE  TMC5160
 #define Y_DRIVER_TYPE  TMC5160
 #define Z_DRIVER_TYPE  TMC5160
-//#define X2_DRIVER_TYPE A4988
+#define X2_DRIVER_TYPE TMC5160
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
@@ -173,8 +173,8 @@
 //#define U_DRIVER_TYPE  A4988
 //#define V_DRIVER_TYPE  A4988
 //#define W_DRIVER_TYPE  A4988
-#define E0_DRIVER_TYPE TMC2208_STANDALONE
-#define E1_DRIVER_TYPE TMC2208_STANDALONE
+#define E0_DRIVER_TYPE TMC5160
+#define E1_DRIVER_TYPE TMC5160
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
 //#define E4_DRIVER_TYPE A4988
@@ -430,7 +430,7 @@
     //#define AUTO_POWER_CONTROLLERFAN  // Turn on PSU for Controller Fan
     //#define AUTO_POWER_CHAMBER_FAN    // Turn on PSU for Chamber Fan
     //#define AUTO_POWER_COOLER_FAN     // Turn on PSU for Cooler Fan
-    #define POWER_TIMEOUT            1800 // (s) Turn off power if the machine is idle for this duration
+    //#define POWER_TIMEOUT          1800 // (s) Turn off power if the machine is idle for this duration
     //#define POWER_OFF_DELAY          60 // (s) Delay of poweroff after M81 command. Useful to let fans run for extra time.
   #endif
   #if EITHER(AUTO_POWER_CONTROL, POWER_OFF_WAIT_FOR_COOLDOWN)
@@ -1074,9 +1074,9 @@
 //#define USE_UMIN_PLUG
 //#define USE_VMIN_PLUG
 //#define USE_WMIN_PLUG
-//#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
+#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
 //#define USE_KMAX_PLUG
@@ -1137,23 +1137,23 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define U_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define V_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define W_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+#define Z_MAX_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
 #define I_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define U_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define V_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define W_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -1174,7 +1174,7 @@
 //#define ENDSTOP_NOISE_THRESHOLD 2
 
 // 电机换向后零位延时触发
-//#define ENDSTOP_THRESHOLD_AFTER_DIR 2  // ms
+#define ENDSTOP_THRESHOLD_AFTER_DIR 2  // mss
 
 // Check for stuck or disconnected endstops during homing moves.
 //#define DETECT_BROKEN_ENDSTOP
@@ -1204,7 +1204,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 10000.0/127, 50000.0/381, 800, 142 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 8000.0/127, 50000.0/1143, 1600, 360 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1359,15 +1359,15 @@
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
-//#define Z_PROBE_SERVO_NR 0
+#define Z_PROBE_SERVO_NR 0
 #ifdef Z_PROBE_SERVO_NR
-  //#define Z_SERVO_ANGLES { 70, 0 }      // Z Servo Deploy and Stow angles
+  #define Z_SERVO_ANGLES { 45, 135 }      // Z Servo Deploy and Stow angles
 #endif
 
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#define BLTOUCH
+// #define BLTOUCH
 
 /**
  * MagLev V4 probe by MDD
@@ -1519,7 +1519,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 36, 72, -1 }
+#define NOZZLE_TO_PROBE_OFFSET { 35, 20, -2 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1815,7 +1815,7 @@
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
   #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
-  //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
+  #define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
 
   // Override individually if the runout sensors vary
@@ -2109,7 +2109,7 @@
 
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
-//#define MANUAL_X_HOME_POS 0
+#define MANUAL_X_HOME_POS -20
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
 //#define MANUAL_I_HOME_POS 0
@@ -2496,7 +2496,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-#define SDSUPPORT
+// #define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
@@ -3018,7 +3018,7 @@
 //#define DGUS_LCD_UI_HIPRECY
 //#define DGUS_LCD_UI_MKS
 //#define DGUS_LCD_UI_RELOADED
-#define DGUS_LCD_UI_CREATBOT
+//#define DGUS_LCD_UI_CREATBOT
 #if ENABLED(DGUS_LCD_UI_MKS)
   #define USE_MKS_GREEN_UI
 #endif
@@ -3038,7 +3038,7 @@
 //
 // Linux screen based on SSD202D, production by CreatBot.
 //
-//#define CREATBOT_LINUX_LCD
+#define CREATBOT_LINUX_LCD
 
 //
 // Touch-screen LCD for Malyan M200/M300 printers
@@ -3359,15 +3359,15 @@
 #endif
 
 // Support for Adafruit NeoPixel LED driver
-//#define NEOPIXEL_LED
+#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
-  #define NEOPIXEL_TYPE          NEO_GRBW // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
+  #define NEOPIXEL_TYPE           NEO_RGB // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
                                           // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
   //#define NEOPIXEL_PIN                4 // LED driving pin
   //#define NEOPIXEL2_TYPE  NEOPIXEL_TYPE
   //#define NEOPIXEL2_PIN               5
-  #define NEOPIXEL_PIXELS              30 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
-  #define NEOPIXEL_IS_SEQUENTIAL          // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
+  #define NEOPIXEL_PIXELS               2 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
+  //#define NEOPIXEL_IS_SEQUENTIAL        // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS         127 // Initial brightness (0-255)
   //#define NEOPIXEL_STARTUP_TEST         // Cycle through colors at startup
 
@@ -3383,9 +3383,9 @@
   #endif
 
   // Use some of the NeoPixel LEDs for static (background) lighting
-  //#define NEOPIXEL_BKGD_INDEX_FIRST   0 // Index of the first background LED
-  //#define NEOPIXEL_BKGD_INDEX_LAST    5 // Index of the last background LED
-  //#define NEOPIXEL_BKGD_COLOR         { 255, 255, 255, 0 }  // R, G, B, W
+  #define NEOPIXEL_BKGD_INDEX_FIRST   1 // Index of the first background LED
+  #define NEOPIXEL_BKGD_INDEX_LAST    1 // Index of the last background LED
+  #define NEOPIXEL_BKGD_COLOR         { 255, 255, 255, 0 }  // R, G, B, W
   //#define NEOPIXEL_BKGD_ALWAYS_ON       // Keep the backlight on when other NeoPixels are off
 #endif
 
@@ -3419,10 +3419,10 @@
 // (ms) Delay before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }       // BLTouch
+#define SERVO_DELAY { 650 }       // 650 > (2100 - 900) * (135 - 45) / 180
 
 // Only power servos during movement, otherwise leave off to prevent jitter
-//#define DEACTIVATE_SERVOS_AFTER_MOVE
+#define DEACTIVATE_SERVOS_AFTER_MOVE
 
 // Edit servo angles with M281 and save to EEPROM with M500
 //#define EDITABLE_SERVO_ANGLES
@@ -3431,32 +3431,36 @@
 //#define SERVO_DETACH_GCODE
 
 // 自定义舵机的脉宽范围
-//#define SERVO0_PULSE_CUSTOM
-//#define SERVO0_MIN_PULSE  900
-//#define SERVO0_MAX_PULSE  2100
+#define SERVO0_PULSE_CUSTOM
+#define SERVO0_MIN_PULSE  900
+#define SERVO0_MAX_PULSE  2100
 
 //#define SERVO1_PULSE_CUSTOM
 //#define SERVO1_MIN_PULSE  512
 //#define SERVO1_MAX_PULSE  2528
 
 // 降低舵机速度
-//#define SERVO_SPEED_SLOWLY
-
-// @section register
-
-#define HAS_CHIP_ID
-//#define SUPPORT_REG_KEY
-#ifdef SUPPORT_REG_KEY
-  #define REGSN_EEPROM_OFFSET 2
-
-  #define TOTAL_TIME_LIMIT    720000      // seconds 200hour For Part-Payment
-  #define REG_PLULIC_KEY      0xDDDDDDDD  // 公钥
-#endif
+#define SERVO_SPEED_SLOWLY
 
 // @section canBus
 
-//#define CANOPEN_SUPPORT
+#define CANOPEN_SUPPORT
 #ifdef CANOPEN_SUPPORT
+
+  /**
+   * 主板代号
+   *    0x01 : F430 NX
+   *
+   * 机头板代号
+   *
+   * 屏幕代号
+   *    0x01 : 5寸Linux屏幕
+   */
+  #define PRODUCT_CODE 0x01000100  // 产品代码 (主板代号 | 机头板代号 | 屏幕代号 | 保留)
+  #define PRODUCT_DATE 0x20240315  // 硬件修改日期
+  #define PRODUCT_VER  "1.0.0"     // 硬件修改版本 (硬件修改日期的直观表达)
+  #define PRODUCT_UI   "7.1.0"     // 适配UI版本
+
   #define CANFILE
   #ifdef CANFILE
     #define CANFILE_HOST_IS_LCD

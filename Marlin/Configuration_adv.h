@@ -344,7 +344,7 @@
   /**
    * Heated chamber watch settings (M141/M191).
    */
-  #define WATCH_CHAMBER_TEMP_PERIOD            80 // (seconds)
+  #define WATCH_CHAMBER_TEMP_PERIOD             0 // (seconds)
   #define WATCH_CHAMBER_TEMP_INCREASE           2 // (°C)
 #endif
 
@@ -727,17 +727,17 @@
  * @section caselight
  * M355 Case Light on-off / brightness
  */
-//#define CASE_LIGHT_ENABLE
+#define CASE_LIGHT_ENABLE
 #if ENABLED(CASE_LIGHT_ENABLE)
   //#define CASE_LIGHT_PIN 4                  // Override the default pin if needed
   #define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
   #define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
-  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 105   // Set default power-up brightness (0-255, requires PWM pin)
+  #define CASE_LIGHT_DEFAULT_BRIGHTNESS 255   // Set default power-up brightness (0-255, requires PWM pin)
   //#define CASE_LIGHT_NO_BRIGHTNESS          // Disable brightness control. Enable for non-PWM lighting.
   //#define CASE_LIGHT_MAX_PWM 128            // Limit PWM duty cycle (0-255)
   //#define CASE_LIGHT_MENU                   // Add Case Light options to the LCD menu
   #if ENABLED(NEOPIXEL_LED)
-    //#define CASE_LIGHT_USE_NEOPIXEL         // Use NeoPixel LED as case light
+    #define CASE_LIGHT_USE_NEOPIXEL         // Use NeoPixel LED as case light
   #endif
   #if EITHER(RGB_LED, RGBW_LED)
     //#define CASE_LIGHT_USE_RGB_LED          // Use RGB / RGBW LED as case light
@@ -751,7 +751,7 @@
 
 // If you want endstops to stay on (by default) even when not homing
 // enable this option. Override at any time with M120, M121.
-//#define ENDSTOPS_ALWAYS_ON_DEFAULT
+#define ENDSTOPS_ALWAYS_ON_DEFAULT
 
 // @section extras
 
@@ -794,13 +794,13 @@
  *       Set the initial X offset and temperature differential with M605 S2 X[offs] R[deg] and
  *       follow with M605 S3 to initiate mirrored movement.
  */
-//#define DUAL_X_CARRIAGE
+#define DUAL_X_CARRIAGE
 #if ENABLED(DUAL_X_CARRIAGE)
-  #define X1_MIN_POS X_MIN_POS    // Set to X_MIN_POS
-  #define X1_MAX_POS X_BED_SIZE   // A max coordinate so the X1 carriage can't hit the parked X2 carriage
-  #define X2_MIN_POS    80        // A min coordinate so the X2 carriage can't hit the parked X1 carriage
-  #define X2_MAX_POS   353        // The max position of the X2 carriage, typically also the home position
-  #define X2_HOME_POS X2_MAX_POS  // Default X2 home position. Set to X2_MAX_POS.
+  #define X1_MIN_POS  0           // Set to X_MIN_POS
+  #define X1_MAX_POS  400         // A max coordinate so the X1 carriage can't hit the parked X2 carriage
+  #define X2_MIN_POS  55          // A min coordinate so the X2 carriage can't hit the parked X1 carriage
+  #define X2_MAX_POS  455         // The max position of the X2 carriage, typically also the home position
+  #define X2_HOME_POS 475         // Default X2 home position. Set to X2_MAX_POS.
                                   // NOTE: For Dual X Carriage use M218 T1 Xn to override the X2_HOME_POS.
                                   // This allows recalibration of endstops distance without a rebuild.
                                   // Remember to set the second extruder's X-offset to 0 in your slicer.
@@ -809,10 +809,10 @@
   #define DEFAULT_DUAL_X_CARRIAGE_MODE DXC_AUTO_PARK_MODE
 
   // Default x offset in duplication mode (typically set to half print bed width)
-  #define DEFAULT_DUPLICATION_X_OFFSET 100
+  #define DEFAULT_DUPLICATION_X_OFFSET 230
 
   // Default action to execute following M605 mode change commands. Typically G28X to apply new mode.
-  //#define EVENT_GCODE_IDEX_AFTER_MODECHANGE "G28X"
+  #define EVENT_GCODE_IDEX_AFTER_MODECHANGE "G28X"
 #endif
 
 // @section multi stepper
@@ -1153,8 +1153,8 @@
  * The default timeout duration can be overridden with M18 and M84. Set to 0 for No Timeout.
  */
 #define DEFAULT_STEPPER_TIMEOUT_SEC 5
-#define DISABLE_IDLE_X
-#define DISABLE_IDLE_Y
+//#define DISABLE_IDLE_X
+//#define DISABLE_IDLE_Y
 //#define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_IDLE_I
 //#define DISABLE_IDLE_J
@@ -1489,17 +1489,17 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  //#define LED_CONTROL_MENU
+  #define LED_CONTROL_MENU
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     //#define NEO2_COLOR_PRESETS              // Enable a second NeoPixel Preset Color menu option
     #if ENABLED(LED_COLOR_PRESETS)
-      #define LED_USER_PRESET_RED        255  // User defined RED value
-      #define LED_USER_PRESET_GREEN      128  // User defined GREEN value
-      #define LED_USER_PRESET_BLUE         0  // User defined BLUE value
+      #define LED_USER_PRESET_RED         63  // User defined RED value
+      #define LED_USER_PRESET_GREEN       63  // User defined GREEN value
+      #define LED_USER_PRESET_BLUE        63  // User defined BLUE value
       #define LED_USER_PRESET_WHITE      255  // User defined WHITE value
       #define LED_USER_PRESET_BRIGHTNESS 255  // User defined intensity
-      //#define LED_USER_PRESET_STARTUP       // Have the printer display the user preset color on startup
+      #define LED_USER_PRESET_STARTUP         // Have the printer display the user preset color on startup
     #endif
     #if ENABLED(NEO2_COLOR_PRESETS)
       #define NEO2_USER_PRESET_RED        255 // User defined RED value
@@ -1670,11 +1670,11 @@
   // Allow international symbols in long filenames. To display correctly, the
   // LCD's font must contain the characters. Check your selected LCD language.
   #define UTF_FILENAME_SUPPORT
-  #define UTF_IS_UTF16
+  // #define UTF_IS_UTF16
 
   #define LONG_FILENAME_HOST_SUPPORT      // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
   //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
-  //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
+  #define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
   //#define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
@@ -2151,7 +2151,7 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-#define LIN_ADVANCE
+//#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
@@ -2778,7 +2778,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       900        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       1500       // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.075    // Multiplied x1000 for TMC26X
@@ -2798,7 +2798,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       600
+    #define Y_CURRENT       1600
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.075
@@ -2818,7 +2818,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       700
+    #define Z_CURRENT       800
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.075
@@ -3169,10 +3169,10 @@
   #define X2_HYBRID_THRESHOLD    350
   #define Y_HYBRID_THRESHOLD     100
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD      20 //3
-  #define Z2_HYBRID_THRESHOLD     20 //3
-  #define Z3_HYBRID_THRESHOLD     20 //3
-  #define Z4_HYBRID_THRESHOLD     20 //3
+  #define Z_HYBRID_THRESHOLD       3
+  #define Z2_HYBRID_THRESHOLD      3
+  #define Z3_HYBRID_THRESHOLD      3
+  #define Z4_HYBRID_THRESHOLD      3
   #define I_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define J_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define K_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
